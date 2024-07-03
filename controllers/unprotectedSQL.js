@@ -1,5 +1,6 @@
 const path = require('path');
 const connection = require('../DB/SQLDB');
+const {UserOrPassNotProvided, UsernameNotFound} = require("../errors/errors");
 const getLogin = async (req, res) => {
     const {file} = req.params;
 
@@ -30,7 +31,6 @@ const getProducts = async (req, res) => {
 const getProductsList = async (req, res) => {
     const {search} = req.query;
     const decodedSearch = decodeURIComponent(search);
-    console.log("search="+decodedSearch+'ffff');
     if (decodedSearch === "") {
         const query = `SELECT id, product_name, price
                        FROM defaultdb.un_protected_products ;`;
@@ -54,18 +54,15 @@ const getProductsList = async (req, res) => {
 const login = async (req, res) => {
     const { username, password } = req.query;
     console.log(username, password);
-    if (!username || !password) {
-        res.status(400).json({ message: 'Username and password are required' });
-        return;
-    }
-    const query=`SELECT * FROM defaultdb.un_protected_users WHERE username = '${username}' AND password = '${password}';`;
+    if (!username || !password) return res.status(401).json({ message: 'Missing Username or password' });
 
+    const query=`SELECT * FROM defaultdb.un_protected_users WHERE username = '${username}' AND password = '${password}';`;
     connection.query(query, (err, results) => {
-        if (err) throw err;
+        if (err) throw new err;
         if(results.length === 0){
             const query_username=`SELECT * FROM defaultdb.un_protected_users WHERE username = '${username}';`;
             connection.query(query_username, (errUserName, resUserName) => {
-                if(resUserName.length === 0) res.status(401).json({ message: 'Invalid username' });
+                if(resUserName.length === 0)  res.status(401).json({ message: 'Invalid username' });
                 else res.status(401).json({ message: 'Invalid password' });
             });
             return;
