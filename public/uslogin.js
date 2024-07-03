@@ -8,7 +8,7 @@ window.onload = () => {
         fetch(`${url}/unprotectedSQL/login?username=${username}&password=${password}`)
             .then((res) => {
                 if (res.status === 200) {
-                    window.location.href = `${url}/unprotectedSQL/products`;
+                    window.location.href = `/static/prod.html`;
                 } else {
                     return res.json();
                 }
