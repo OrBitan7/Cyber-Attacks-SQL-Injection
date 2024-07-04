@@ -7,24 +7,23 @@ const getLogin = async (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', `${file}.html`)); // todo not safe
 }
 
-const getProductsList = async (req, res) => {
+const getProductsList = async (req, res, next) => {
     const {search} = req.query;
     const decodedSearch = decodeURIComponent(search);
     if (decodedSearch === "") {
         const query = `SELECT id, product_name, price
                        FROM defaultdb.un_protected_products ;`;
         connection.query(query, (err, results) => {
-            if (err) throw err;
+            if (err) return next(new Error());
             return res.status(200).json({results});
         });
     }
     else{
         const query = `SELECT id, product_name, price
                        FROM defaultdb.un_protected_products 
-                        WHERE product_name LIKE '${decodedSearch}';`;
-        console.log(query);
+                        WHERE product_name LIKE '%${decodedSearch}%';`;
         connection.query(query, (err, results) => {
-            if (err) throw err;
+            if (err) return next( new Error());
             return res.status(200).json({results});
         });
     }

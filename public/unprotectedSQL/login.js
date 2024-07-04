@@ -1,5 +1,5 @@
 window.onload = () => {
-    const url = 'http://localhost:3000';
+    const url = 'https://cyber-attacks-sql-injection.onrender.com';
     document.getElementById('login').onsubmit = (event) => {
         event.preventDefault();
         const username = document.getElementById('username').value;

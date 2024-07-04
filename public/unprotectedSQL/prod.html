@@ -20,7 +20,7 @@
 </div>
 <script>
     const getList = async (search) =>{
-        fetch(`http://localhost:3000/unprotectedSQL/products?search=${search}`)
+        fetch(`https://cyber-attacks-sql-injection.onrender.com/unprotectedSQL/products?search=${search}`)
             .then(response => response.json())
             .then(data => {
                 const prodList = document.getElementById('prod_list');
