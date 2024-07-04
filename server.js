@@ -10,9 +10,12 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/static', express.static(join(__dirname, 'public')));
+app.use('/', express.static(join(__dirname, 'public')));
 app.use('/unprotectedSQL', unprotectedSqlRouter);
 app.use('/protectedSQL', protectedSqlRouter);
+app.use('/*',(req, res,next) => {
+
+});
 
 
 

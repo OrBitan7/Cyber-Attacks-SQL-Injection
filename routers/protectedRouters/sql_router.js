@@ -1,10 +1,12 @@
 const { Router } = require('express');
-const { P_getLogin, P_login, P_getProducts,P_getProductsList } = require('../../controllers/protectedSQL');
+const { P_login,P_getProductsList } = require('../../controllers/protectedSQL');
+const express = require("express");
+const {join} = require("path");
 
 const protectedSqlRouter = new Router();
+protectedSqlRouter.use('/', express.static(join(__dirname, '../../public/protectedSQL')));
 protectedSqlRouter.get('/login', P_login)
 protectedSqlRouter.get('/products', P_getProductsList)
-protectedSqlRouter.get('/:file', P_getLogin)
 
 
 
