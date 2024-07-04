@@ -1,11 +1,6 @@
 const path = require('path');
 const connection = require('../DB/SQLDB');
 const {UserOrPassNotProvided, UsernameNotFound, IncorrectPassword} = require("../errors/errors");
-const getLogin = async (req, res) => {
-    const {file} = req.params;
-
-    res.sendFile(path.join(__dirname, '..', 'public', `${file}.html`)); // todo not safe
-}
 
 const getProductsList = async (req, res, next) => {
     const {search} = req.query;
@@ -45,4 +40,4 @@ const login = async (req, res, next) => {
 
 
 }
-module.exports = { getLogin ,login,getProductsList};
+module.exports = { login,getProductsList};

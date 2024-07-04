@@ -1,8 +1,12 @@
 const { Router } = require('express');
-const { getLogin } = require('../../controllers/unprotectedNoSQL');
+const { login } = require('../../controllers/unprotectedNoSQL');
+const express = require("express");
+const {join} = require("path");
 
 const unprotectedNoSqlRouter = new Router();
-unprotectedNoSqlRouter.get('/', getLogin)
+unprotectedNoSqlRouter.use('/', express.static(join(__dirname, '../../public/unprotectedSQL')));
+unprotectedNoSqlRouter.get('/users', login);
+
 
 
 module.exports = { unprotectedNoSqlRouter };
