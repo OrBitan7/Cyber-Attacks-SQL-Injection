@@ -1,8 +1,19 @@
-const { Router } = require('express');
-
-
+const { Router, } = require('express');
+const mongoSanitize = require('express-mongo-sanitize');
+const {P_login} = require("../../controllers/protectedNoSQL");
 const protectedNoSqlRouter = new Router();
-protectedNoSqlRouter.get('/', )
+
+const express = require("express");
+const {join} = require("path");
+
+protectedNoSqlRouter.use('/', express.static(join(__dirname, '../../public/unprotectedSQL')));
+protectedNoSqlRouter.use(mongoSanitize({
+    onSanitize: ({ req , key }) => {
+        console.log(`This request[${key}] is sanitized`);
+        throw new Error(`SanitizationError: Invalid input in ${key}`);
+    }
+}));
+protectedNoSqlRouter.get('/login', P_login);
 
 
 module.exports = { protectedNoSqlRouter };

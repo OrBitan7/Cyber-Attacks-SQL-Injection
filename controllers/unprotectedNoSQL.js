@@ -1,18 +1,53 @@
 const model = require('../models/users.model');
 const {UsernameNotFound} = require("../errors/errors");
+//GET Findone:
+// const login = async (req, res, next) => {
+//
+//     const {username, password} = req.query;
+//     console.log(req.query);
+//
+//     // const users = await model.findOne({username, password});
+//     const users = await model.find({username, password});
+//     console.log(users);
+//     if(!users) {
+//         return next(new UsernameNotFound(username));
+//     }
+//     else {
+//         res.status(200).json({message: "Success"});
+//         res.send();
+//     }
 
 
+//// GET: find }
 const login = async (req, res, next) => {
-    const name = req.query.username;
-    const pass = req.query.password;
-    console.log(name, pass);
-    // const users = await model.find();
 
-    const users = await model.find({username: name, password:pass});
+    const {username, password} = req.query;
+    console.log(req.query);
+
+    const users = await model.find({username, password});
     console.log(users);
-    if(users.length === 0) return next(new UsernameNotFound(name));
-    res.status(200).json({ message: users });
-    res.send();
+    if(users && users.length === 0) {
+        return next(new UsernameNotFound(username));
+    }
+    else {
+        res.status(200).json({message: "Success"});
+        res.send();
+    }
 }
-
+// POST:
+// const login = async (req, res, next) => {
+//
+//     const {username, password} = req.body;
+//
+//     const users = await model.findOne({username, password});
+//     console.log(req.body);
+//     console.log(users);
+//     if(!users) {
+//         return next(new UsernameNotFound(username));
+//     }
+//     else {
+//         res.status(200).json({message: "Success"});
+//         res.send();
+//     }
+// }
 module.exports = { login };

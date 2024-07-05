@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Protected NoSQL Login</title>
+</head>
+<body class="d-flex vh-100">
+<div class="container d-flex flex-column justify-content-center align-items-center ">
+    <div class="row w-100 mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-5" >Protected NoSQL</h1>
+        </div>
+    </div>
+    <form method="get" id ="login" class="d-flex flex-column align-items-center">
+        <input type="text" id="username" class="form-control mb-3 col-12 col-md-6" name="username" placeholder="Username" required >
+        <input type="password" id="password"  class="form-control mb-3 col-12 col-md-6" name="password" placeholder="Password" required>
+        <input type="submit" class="btn btn-primary col-6 col-3" value="Log In">
+    </form>
+    <div id="response" class="badge p-3 mt-4"></div>
+</div>
+<script>
+    window.onload = () => {
+        const url = 'https://cyber-attacks-sql-injection.onrender.com';
+        document.getElementById('login').onsubmit = (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch(`${url}/protectedNoSQL/login?username=${username}&password=${password}`)
+                .then((res) => {
+                    if (res.status === 200) {
+                        window.location.href = `prod.html`;
+                    } else {
+                        return res.json();
+                    }
+                })
+                .then((data) => {
+                    if (data?.message) {
+                        const response = document.getElementById('response');
+                        response.innerHTML = data.message;
+                        response.classList.add("text-bg-danger");
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    const response = document.getElementById('response');
+                    response.innerHTML = 'An error occurred while processing your request.';
+                    response.classList.add("text-bg-danger");
+                });
+
+        }
+    }
+</script>
+</body>
+</html>
