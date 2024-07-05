@@ -6,7 +6,7 @@ const protectedNoSqlRouter = new Router();
 const express = require("express");
 const {join} = require("path");
 
-protectedNoSqlRouter.use('/', express.static(join(__dirname, '../../public/unprotectedSQL')));
+protectedNoSqlRouter.use('/', express.static(join(__dirname, '../../public/protectedNoSQL')));
 protectedNoSqlRouter.use(mongoSanitize({
     onSanitize: ({ req , key }) => {
         console.log(`This request[${key}] is sanitized`);

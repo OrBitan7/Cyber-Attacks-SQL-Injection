@@ -4,7 +4,7 @@ const express = require("express");
 const {join} = require("path");
 
 const unprotectedNoSqlRouter = new Router();
-unprotectedNoSqlRouter.use('/', express.static(join(__dirname, '../../public/unprotectedSQL')));
+unprotectedNoSqlRouter.use('/', express.static(join(__dirname, '../../public/unprotectedNoSQL')));
 unprotectedNoSqlRouter.get('/login', login);
 // unprotectedNoSqlRouter.post('/users', login);
 
