@@ -1,6 +1,6 @@
 const path = require('path');
 const connection = require('../DB/SQLDB');
-const mysql = require('mysql2');
+
 const {UserOrPassNotProvided, UsernameNotFound, IncorrectPassword} = require("../errors/errors");
 
 const P_getProductsList = async (req, res, next) => {

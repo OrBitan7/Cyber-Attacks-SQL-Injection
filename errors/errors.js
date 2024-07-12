@@ -1,4 +1,4 @@
 const { PasswordNotProvided, UsernameNotProvided, UserAndPassNotProvided, IncorrectPassword } = require('./error400')
-const {UsernameNotFound} = require('./error404')
+const {UsernameNotFound, Unauthorized} = require('./error404')
 
-module.exports = {PasswordNotProvided, UsernameNotProvided, UserOrPassNotProvided: UserAndPassNotProvided, UsernameNotFound, IncorrectPassword }
+module.exports = {PasswordNotProvided, UsernameNotProvided, UserOrPassNotProvided: UserAndPassNotProvided, UsernameNotFound, IncorrectPassword, Unauthorized }

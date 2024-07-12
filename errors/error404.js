@@ -13,5 +13,11 @@ class NotFound extends Error {
     this.prop = props;
   }
 }
+ class Unauthorized extends NotFound {
+  constructor() {
+    super(`User was Unauthorized`);
+    this.name = this.constructor.name;
+  }
+}
 
-module.exports = { UsernameNotFound };
+module.exports = { UsernameNotFound, Unauthorized };

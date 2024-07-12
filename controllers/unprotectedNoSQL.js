@@ -29,10 +29,8 @@ const login = async (req, res, next) => {
     if(users && users.length === 0) {
         return next(new UsernameNotFound(username));
     }
-    else {
-        res.status(200).json({message: "Success"});
-        res.send();
-    }
+    else res.status(200).json({message: "Success"});
+
 }
 // POST:
 // const login = async (req, res, next) => {

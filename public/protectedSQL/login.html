@@ -24,7 +24,9 @@
 </div>
 </body>
 <script>window.onload = () => {
-    const url = 'https://cyber-attacks-sql-injection.onrender.com';
+    // const url = 'https://cyber-attacks-sql-injection.onrender.com';
+
+    const url = 'http://localhost:3000';
     document.getElementById('login').onsubmit = (event) => {
         event.preventDefault();
         const username = document.getElementById('username').value;
@@ -33,7 +35,7 @@
         fetch(`${url}/protectedSQL/login?username=${username}&password=${password}`)
             .then((res) => {
                 if (res.status === 200) {
-                    window.location.href = `prod.html`;
+                    window.location.href = `prod.html`
                 } else {
                     return res.json();
                 }
