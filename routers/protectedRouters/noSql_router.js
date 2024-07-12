@@ -9,7 +9,6 @@ const {join} = require("path");
 protectedNoSqlRouter.use('/', express.static(join(__dirname, '../../public/protectedNoSQL')));
 protectedNoSqlRouter.use(mongoSanitize({
     onSanitize: ({ req , key }) => {
-        console.log(`This request[${key}] is sanitized`);
         throw new Error(`SanitizationError: Invalid input in ${key}`);
     }
 }));

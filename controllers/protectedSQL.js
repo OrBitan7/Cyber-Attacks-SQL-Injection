@@ -17,7 +17,6 @@ const P_getProductsList = async (req, res, next) => {
                        FROM defaultdb.un_protected_products
                         WHERE product_name LIKE ?;`;
         const searchPattern = `%${decodedSearch}%`;
-        console.log(query , searchPattern);
         connection.execute(query,[searchPattern], (err, results) => {
             if (err) return next( new Error("you hackin'?"));
             res.status(200).json({results});
