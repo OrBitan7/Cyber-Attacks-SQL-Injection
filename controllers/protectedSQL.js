@@ -35,7 +35,7 @@ const P_login = async (req, res, next) => {
                 if(resUserName.length === 0) next(new UsernameNotFound(username));
                 else next(new IncorrectPassword());
             });
-        } else res.status(200).json({ message: results });
+        } else res.redirect('/protectedNoSQL/prod.html');
     });
 
 

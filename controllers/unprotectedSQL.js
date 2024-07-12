@@ -35,9 +35,7 @@ const login = async (req, res, next) => {
                 if(resUserName.length === 0) return next(new UsernameNotFound(username));
                 else return next(new IncorrectPassword());
             });
-        } else {
-            return res.status(200).json({ message: "Success" });
-        }
+        } else res.redirect('/unprotectedSQL/prod.html');
 
     });
 
